@@ -21,7 +21,7 @@ print("Жди!")
 # создали папку для txt
 # try:
 try:
-    os.mkdir('Результат сканирования')
+    os.mkdir('scrap_csmoney-master/Результат сканирования')
 except IndentationError:
     pass
     # print("Сначала удали папку: Результат сканирования код: IndentationError")
@@ -53,7 +53,7 @@ for port in ports:
         # result_close: list[list[Any]] = [score_close]
         # Поймали ошибку
         print(f"{host}: {port} порт закрыт")
-        port_close = open('Результат сканирования\\порты_закрыты.txt', 'a+', encoding='UTF-8')
+        port_close = open('scrap_csmoney-master/порты_закрыты.txt', 'a+', encoding='UTF-8')
         # C:\\Users\\vsinenko\\PycharmProjects\\stepik\\Test inver\\отстрел\\
         # ('\\Сканер портов Результат\\порты_закрыты.txt')
         port_close.write(f"{host},{port} порт закрыт \n")
@@ -62,7 +62,7 @@ for port in ports:
     # pass
     else:
         print(f"{host}: {port} порт активен")
-        port_open = open('Результат сканирования\\порты_открыты.txt', 'a+', encoding='UTF-8')
+        port_open = open('scrap_csmoney-master/порты_открыты.txt', 'a+', encoding='UTF-8')
         # C:\\Users\\vsinenko\\PycharmProjects\\stepik\\Test inver\\отстрел\\
         # ('\\Сканер портов Результат\\порты_открыты.txt')
         port_open.write(f"{host},{port} порт активен \n")
@@ -70,7 +70,7 @@ for port in ports:
         scaner_variable.close
     # завершили цикл
 try:
-    file_open_open = open('Результат сканирования\\порты_открыты.txt', 'r', encoding='UTF-8')
+    file_open_open = open('scrap_csmoney-master/порты_открыты.txt', 'r', encoding='UTF-8')
     file_count_open = file_open_open.read()
     file_score_open = file_count_open.count('активен')
     print()
@@ -79,7 +79,7 @@ try:
 except FileNotFoundError:
     print("Все порты закрыты")
 try:
-    file_open_close = open('Результат сканирования\\порты_закрыты.txt', 'r', encoding='UTF-8')
+    file_open_close = open('scrap_csmoney-master/порты_закрыты.txt', 'r', encoding='UTF-8')
     file_count_close = file_open_close.read()
     file_score_close = file_count_close.count('закрыт')
     print()
