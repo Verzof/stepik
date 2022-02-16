@@ -8,7 +8,7 @@ import telebot, re
 import telebot, wikipedia, re
 
 # Создаем экземпляр бота
-bot = telebot.TeleBot('5026195738:AAEvvgBrxLC1ONQnPHWdVyWoXiZXCuBGnJ0')
+bot = telebot.TeleBot('BOT_TOKEN')
 # Устанавливаем русский язык в Wikipedia
 wikipedia.set_lang("ru")
 
