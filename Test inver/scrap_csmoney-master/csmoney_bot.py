@@ -1,14 +1,14 @@
 import json
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
-from aiogram.utils.markdown import hbold, hlink
+from aiogram.utils.markdown import hbold, hlink, text
 from main import collect_data
 from os import getenv
 import asyncio
 import logging
 from aiogram.utils.exceptions import BotBlocked
 from config import *
-
+# myid = 474811051
 # bot = Bot(token=str(TOKEN), parse_mode=types.ParseMode.HTML)
 bot = Bot(token=getenv('BOT_TOKEN'), parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 
 @dp.message_handler(commands='start')
 async def start(message: types.Message):
-    start_buttons = ['Кнопка 1', 'Кнопка 2', 'Кнопка 3', 'Кнопка 4']
+    start_buttons = ['Кнопка 1', 'Кнопка 2', 'Спец-команды', 'Кнопка 4']
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*start_buttons)
 
@@ -115,14 +115,15 @@ async def get_discount_knives(message: types.Message):
 async def cmd_inline_url(message: types.Message):
     buttons = [
         types.InlineKeyboardButton(text="GitHub", url="https://github.com"),
-        types.InlineKeyboardButton(text="Оф. канал Telegram", url="tg://resolve?domain=telegram")
+        types.InlineKeyboardButton(text="Оф. канал Telegram", url="tg://resolve?domain=telegram"),
+        types.InlineKeyboardButton(text="Тестова кнопка 1", url="https://vk.com")
     ]
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     keyboard.add(*buttons)
-    await message.answer("Кнопки-ссылки", reply_markup=keyboard)
+    await message.answer("Кнопки-ссылки и тестова кнопка", reply_markup=keyboard)
 
 
-@dp.message_handler(commands="special_buttons")
+@dp.message_handler(Text(equals='Спец-команды'))
 async def cmd_special_buttons(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     # keyboard.add(types.KeyboardButton(text="Запросить геолокацию", request_location=True))
@@ -130,7 +131,6 @@ async def cmd_special_buttons(message: types.Message):
     keyboard.add(types.KeyboardButton(text="Создать викторину",
                                       request_poll=types.KeyboardButtonPollType(type=types.PollType.QUIZ)))
     await message.answer("Выберите действие:", reply_markup=keyboard)
-
 
 
 @dp.errors_handler(exception=BotBlocked)
